@@ -1,3 +1,7 @@
+<!-- Usado como base para as demais telas
+   é basicamente um navbar com as opções para cadastrar e listar
+-->
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -32,9 +36,10 @@
    </div>
 
    <!-- Essa id app é para chamar o componente, esse componente foi usado apenas para teste
-    --- é usado app pois é a forma que está registrado
+    --- é usado app pois é a forma que está registrado em resources->js->app.js
     -->
     <div id="app">
+        <!-- Aqui entra os dados de quem usar o layout como base -->
         @yield('content')
     </div>
 

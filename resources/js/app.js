@@ -15,6 +15,8 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+
+//  Registro o componente
 Vue.component('form-component', require('./components/FormComponent.vue'));
 
 const app = new Vue({

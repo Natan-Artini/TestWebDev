@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Contem todas as ações dos contatos, listar, adicionar, editar e excluir
+*/
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -49,12 +53,17 @@ class Contato extends Controller
 
     /**
      * Usado apenas para redirecionar para a pagina de edição
+     * Encontra o contato especifico e manda como parametro
      */
     public function viewEdit($id){
         $contato = ContatoModel::find($id);
         return view('contatos.add_edit', compact('contato'));
     }
-    
+
+    /**
+     * Faz a atualização do cadastro, recebe os dados por request
+     * e faz update no id que foi alterado
+    */
     public function edit(Request $request){
 
         $data = $request->all();
@@ -70,6 +79,10 @@ class Contato extends Controller
         return json_encode($contatos);
     }
     
+    /**
+     * Faz a exclusão do cadastro, recebe por parametro o ID do contato
+     * encontra no banco e faz o delet, direciona novamente para a tela de contatos
+    */
     public function exclude($id){
         $contato = ContatoModel::find($id);
         $contato->delete();

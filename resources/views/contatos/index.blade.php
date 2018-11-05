@@ -1,3 +1,15 @@
+<!-- Usa como base o arquivo layout, apartir dele cria uma tabela
+    para apresentar os cadastros existentes que vem como parametro do Controller.
+    
+    Tem a opção para Editar e Excluir que passam o ID do contato escolhido.
+
+    Na edição vai para o controller viewEdit que chama a view add_edit
+    que retorna os dados do contato, conforme ID recebida.
+
+    Na exclusão vai para o controller exclude que exclui o cadastro selecionado
+    Precisa melhorar, não pede confimação e não apresenta mensagem de sucesso
+ -->
+
 @extends('contatos.layout')
 
 @section('content')
@@ -32,7 +44,7 @@
                 </th>
                 <th>
                     <a href="/contatos/exclude/{{$contato->id}}">
-                        <button class="btn btn-danger"> Excluir <i class="fa fa-trash"></i></button>
+                        <button class="btn btn-danger" onclick="excluir()"> Excluir <i class="fa fa-trash"></i></button>
                     </a>
                 </th>
             @endforeach

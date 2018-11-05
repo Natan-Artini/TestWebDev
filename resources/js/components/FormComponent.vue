@@ -1,4 +1,7 @@
 <template>
+<!-- Apresenta um formulário simples para cadastro ou edição dos contatos
+    quando é para editar ele já carrega os dados do cadastro escolhido no form
+-->
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -23,7 +26,7 @@
 </template>
 
 <script>
-    //Importe do sweetalert
+    //Importe do sweetalert para gerar alerta de confirmação
     import swal from 'sweetalert2'
 
     // Define o escopo do form pelo nome definido em v-model
@@ -46,10 +49,11 @@
         // Pega a informação do contato passado
         props:['contato'],
 
+
+        // Se existe um contato o form vai receber esse contato
+        // Como os campos do form e do contato são os mesmos
+        // vai assumir por padrão e o form vai ficar preenchido
         mounted() {
-            // Se existe um contato o form vai receber esse contato
-            // Como os campos do form e do contato são os mesmos
-            // vai assumir e o form vai ficar preenchido
             if(this.contato){
                 this.form = this.contato;
             }
@@ -60,7 +64,9 @@
                 // Ao tivar loadin é desativado o botão e ativa a animação
                 this.loading = true;
 
-                // Executa o metodo post
+                // Verifica qual metodo foi acionado, o POST ou PUT, edit ou adicionar
+                // Verifica se o retorno foi o esperado e usa o sweetalert2
+                // para apresentar uma mensagem de confirmação
                 if(this.contato){
                     axios.put('/contatos', this.form)
                     .then(response => {
@@ -68,8 +74,7 @@
                         this.loading = false;
 
                         // Verifica se o retorno foi 200 ou 201
-                        // Caso sim apresenta a mensagem do sweet
-                        // redireciona para lista de contatos
+                        // apresenta a mensagem e redireciona para lista de contatos
                         if(response.status == 200 || response.status == 201){
                             swal(
                                 'Editado!',
@@ -79,7 +84,7 @@
                                 window.location.href="/contatos"
                             })
 
-                        // Alguma mensagem diferente de 200 || 201 apresenta mensagem    
+                        // Alguma mensagem diferente de 200 || 201 apresenta mensagem  
                         }else{
                             swal(
                                 'Erro!',
@@ -105,8 +110,7 @@
                         this.loading = false;
 
                         // Verifica se o retorno foi 200 ou 201
-                        // Caso sim apresenta a mensagem do sweet
-                        // redireciona para lista de contatos
+                        // apresenta a mensagem redireciona para lista de contatos
                         if(response.status == 200 || response.status == 201){
                             swal(
                                 'Cadastrado!',
@@ -142,8 +146,8 @@
 </script>
 
 <style lang="scss">
+ // Defino a animação rotate, duração de 1 segundo e duração infinita
  .rotate{
-     // Defino a animação rotate, duração de 1 segundo e duração infinita
      animation: rotate 1s infinite;
  }
 
